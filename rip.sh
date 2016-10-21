@@ -25,40 +25,33 @@
 # -ux or -xu
 #   : calls the unmount and clean fucntion from unmount_clean.sh
 #*******************************************************************************
-# TODO create a default flag call for is user doesent pick any flag 
+# TODO create a default flag call for is user doesent pick any flag
 FLAGS="$1"
 #Mount
-if [ "$FLAGS" = "-m" ]
-then
+if [ "$FLAGS" = "-m" ]; then
   echo Mount
   sh mount_copy.sh -m;
 #Mount and Copy
-elif [ "$FLAGS" = "-mc" -o "$FLAGS" = "-cm" ]
-then
+elif [ "$FLAGS" = "-mc" -o "$FLAGS" = "-cm" ]; then
   echo Mount and Copy
   sh mount_copy.sh -mc;
 #Copy
-elif [ "$FLAGS" = "-c" ]
-then
+elif [ "$FLAGS" = "-c" ]; then
   echo Copy
   sh mount_copy.sh -c
 # Unmount
-elif [ "$FLAGS" = "-u" ]
-  then
+elif [ "$FLAGS" = "-u" ]; then
     echo Unmount
     sh unmount_clean.sh -u
 # Unmount and Clean
-elif [ "$FLAGS" = "-ux" -o "$FLAGS" = "-xu" ]
-  then
+elif [ "$FLAGS" = "-ux" -o "$FLAGS" = "-xu" ]; then
     echo Unmount and Clean
     sh unmount_clean.sh -ux
 # Clean
-elif [ "$FLAGS" = "-x" ]
-  then
+elif [ "$FLAGS" = "-x" ]; then
     echo Clean
     sh unmount_clean.sh -x
-elif [ "$FLAGS" = "-h" ]
-then
+elif [ "$FLAGS" = "-h" ]; then
     cat help.txt
 else
     echo "ERROR: Rip can't process command line arguments"

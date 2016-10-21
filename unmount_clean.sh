@@ -29,14 +29,11 @@ clean(){
   done
 }
 
-if [ "$FLAGS" = "-u" ]
-then
+if [ "$FLAGS" = "-u" ]; then
   unmount;
-elif [ "$FLAGS" = "-x" ]
-then
+elif [ "$FLAGS" = "-x" ]; then
   clean;
-elif [ "$FLAGS" = "-ux" ]
-then
+elif [ "$FLAGS" = "-ux" ]; then
   unmount;clean;
 else
   echo "ERROR: unmount_clean file has no commands found"

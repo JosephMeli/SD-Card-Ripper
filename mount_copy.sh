@@ -36,8 +36,7 @@ srcpath="/DCIM/"
 
 # Run as root, of course.
 amIRoot(){
-  if [ "$UID" -ne "$ROOT_UID" ]
-  then
+  if [ "$UID" -ne "$ROOT_UID" ]; then
     echo "Must be root to run this script."
     exit $E_NOTROOT
   fi
@@ -64,15 +63,12 @@ copy(){
 }
 
 # TODO:fix -> mount and copy are allowed by common user needs to be root user
-if [ "$FLAGS" = "-m" ]
-then
-  amIRoot;
+if [ "$FLAGS" = "-m" ]; then
   Mount
-elif [ "$FLAGS" = "-c" ]
-then
+elif [ "$FLAGS" = "-c" ]; then
+  amIRoot;
   copy;
-elif [ "$FLAGS" = "-mc" ]
-then
+elif [ "$FLAGS" = "-mc" ]; then
   amIRoot;
   Mount; copy;
 else
