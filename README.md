@@ -5,7 +5,7 @@
 
 ## Filename: rip.sh -> Main Driver
 run using:
-$ sh rip.sh [option]
+$ sh rip.sh [option] [filepath]
 
 ### Purpose:
  This program is a driver for the mount_copy and unmount_clean scripts. The

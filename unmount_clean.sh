@@ -8,19 +8,26 @@
 #             Development environment            #
 #************************************************#
 FLAGS="$1"
+mntpoint= "mnt/"
+
 
 unmount(){
-  for each in mnt/*; do
+  for each in "$mntpoint"*; do
       echo "UNMOUNTING -----> $each"\r;
-      sudo umount "$each";
+      umount "$each";
   done
   echo "Unmounting Completed"
 }
 
 clean(){
-  for each in mnt/*; do
-    echo "$each";
-    rm -r "$each";
+for each in "$mntpoint"*; do
+  if [ "$(ls -A "$each")" ]; then
+     echo "$each is not Empty"
+   else
+     echo "$each is Empty"
+     rm -r "$each";
+      echo "removed $each"
+    fi
   done
 }
 

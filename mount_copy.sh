@@ -10,6 +10,7 @@
 
 FLAGS="$1"
 PATH= "$2"
+mntpoint= "mnt/"
 srcpath="/DCIM/"
 
 # Run as root, of course.
@@ -21,15 +22,15 @@ Mount(){
   for each in /dev/disk/by-path/*-usb-*-part1; do
     echo "MOUNTING -----> $each"\r;
     mntdir="$(basename "$each")"
-    mkdir mnt/"$(basename "$each")";
-    mount "$each" mnt/"$(basename "$each")";
+    mkdir "$mntpoint""$(basename "$each")";
+    mount "$each" "$mntpoint""$(basename "$each")";
   done
   echo "Mounting Completed"
 
 }
 
 copy(){
- for each in mnt/*; do
+ for each in "$mntpoint"*; do
      echo "COPYING -----> $each"\r;
      echo "$PATH"
      rsync -rav "${each}${srcpath}"* "$PATH"

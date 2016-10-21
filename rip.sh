@@ -39,15 +39,15 @@ elif [[ "$FLAGS" = "" -o "$FLAGS" = " " ]]; then
 #Mount
 elif [[ "$FLAGS" = "-m" ]]; then
   echo Mount
-  sh mount_copy.sh -m;
+  sh mount_copy.sh -m "$PATH" ;
 #Mount and Copy
 elif [[ "$FLAGS" = "-mc" -o "$FLAGS" = "-cm" ]]; then
   echo Mount and Copy
-  sh mount_copy.sh -mc;
+  sh mount_copy.sh -mc "$PATH";
 #Copy
 elif [[ "$FLAGS" = "-c" ]]; then
   echo Copy
-  sh mount_copy.sh -c
+  sh mount_copy.sh -c "$PATH";
 # Unmount
 elif [[ "$FLAGS" = "-u" ]]; then
     echo Unmount
