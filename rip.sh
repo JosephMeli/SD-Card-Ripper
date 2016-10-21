@@ -35,10 +35,9 @@ if [[ "$PATH" = "" -o "$PATH" = " " ]]; then
   exit 1
 elif [[ "$FLAGS" = "" -o "$FLAGS" = " " ]]; then
   echo DEFAULT: Mount and Copy
-  sh mount_copy.sh -mc ~/;
-fi
+  sh mount_copy.sh -mc "~/";
 #Mount
-if [[ "$FLAGS" = "-m" ]]; then
+elif [[ "$FLAGS" = "-m" ]]; then
   echo Mount
   sh mount_copy.sh -m;
 #Mount and Copy
@@ -63,6 +62,9 @@ elif [[ "$FLAGS" = "-x" ]]; then
     sh unmount_clean.sh -x
 elif [[ "$FLAGS" = "-h" ]]; then
     cat help.txt
+elif [[ "$FLAGS" = "/*" ]]; then
+    "$PATH" = "$FLAGS"
+    sh mount_copy.sh -mc "$PATH"
 else
     echo "ERROR: Rip can't process command line arguments"
 fi

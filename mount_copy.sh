@@ -14,7 +14,7 @@ srcpath="/DCIM/"
 
 # Run as root, of course.
 amIRoot(){
-"$(whoami)" != 'root' && (echo you are using a non-privileged account; exit 1
+  "$(whoami)" != 'root' && (echo you are using a non-privileged account; exit 1
 }
 
 Mount(){

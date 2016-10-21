@@ -2,7 +2,7 @@
 This program is a driver for the mount_copy and unmount_clean scripts. The
 driver processes the command line flags and then calls the correct function
 Usage:
-sh rip.sh [option]
+sh rip.sh [option] [copy destination file Path]
 options:
 -m
   :calls mount function from mount_copy.sh
