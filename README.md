@@ -9,7 +9,7 @@ $  ./rip.sh [option] [absolute file path]
 
 ## Usage:
 
- ./rip.sh [option]
+ [option]
  * -m :calls mount function from mount_copy.sh
  * -c :calls copy function from mount_copy.sh
  * -mc or -cm: calls mount  and copy functions from mount_copy.sh
