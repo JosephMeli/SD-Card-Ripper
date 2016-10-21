@@ -20,15 +20,15 @@ unmount(){
 clean(){
   for each in mnt/*; do
     echo "$each";
-    sudo rm -r "$each";
+    rm -r "$each";
   done
 }
 
-if [ "$FLAGS" = "-u" ]; then
+if [[ "$FLAGS" = "-u" ]]; then
   unmount;
-elif [ "$FLAGS" = "-x" ]; then
+elif [[ "$FLAGS" = "-x" ]]; then
   clean;
-elif [ "$FLAGS" = "-ux" ]; then
+elif [[ "$FLAGS" = "-ux" ]]; then
   unmount;clean;
 else
   echo "ERROR: unmount_clean file has no commands found"
