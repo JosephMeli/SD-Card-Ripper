@@ -2,24 +2,18 @@
 
 #SD-Ripper
 
-## Filename: rip.sh -> Main Driver
+# Filename: rip.sh -> Main Driver
 run using:
 
 $  ./rip.sh [option] [absolute file path]
 
-### Usage:
-
-
-### Purpose:
- This program is a driver for the mount_copy and unmount_clean scripts. The
- driver processes the command line flags and then calls the correct function
- Usage:
+## Usage:
 
  ./rip.sh [option]
  * -m :calls mount function from mount_copy.sh
  * -c :calls copy function from mount_copy.sh
- * -mc or -cm:calls mount  and copy functions from mount_copy.sh
- * -u:calls unmount function from unmount_clean.sh
+ * -mc or -cm: calls mount  and copy functions from mount_copy.sh
+ * -u: calls unmount function from unmount_clean.sh
  * -x: calls the clean function from unmount_clean.sh
  * -ux or -xu: calls the unmount and clean function from unmount_clean.sh
 
@@ -54,4 +48,3 @@ destination.  This process happens with rysnc a command that works like rysnc
 takes three possible arguments. first will be optional flags depending on what
 you  want to sync, the second is source you are copying from and the final is
 the destination.
-

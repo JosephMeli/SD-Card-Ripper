@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #************************************************#
 #                   rip.sh                       #
 #           written by Joseph Meli               #
@@ -7,17 +6,14 @@
 #                                                #
 #              SD Ripper Script                  #
 #************************************************#
-
 FLAGS="$1"
 PATH= "$2"
 mntpoint= "mnt/"
 srcpath="/DCIM/"
-
 # Run as root, of course.
 amIRoot(){
   "$(whoami)" != 'root' && (echo you are using a non-privileged account); exit 1
 }
-
 Mount(){
   for each in /dev/disk/by-path/*-usb-*-part1; do
     echo "MOUNTING -----> $each"\r;
@@ -26,7 +22,6 @@ Mount(){
     mount "$each" "$mntpoint""$(basename "$each")";
   done
   echo "Mounting Completed"
-
 }
 copy(){
  for each in "$mntpoint"*; do
@@ -36,7 +31,6 @@ copy(){
      sync
    done
 }
-
 unmount(){
   for each in "$mntpoint"*; do
       echo "UNMOUNTING -----> $each"\r;
@@ -44,7 +38,6 @@ unmount(){
   done
   echo "Unmounting Completed"
 }
-
 clean(){
 for each in "$mntpoint"*; do
   if [ "$(ls -A "$each")" ]; then
@@ -94,7 +87,7 @@ elif [[ "$FLAGS" = "-h" ]]; then
 # and use that file path.
 elif [[ "$FLAGS" = "/*" ]]; then
     "$PATH" = "$FLAGS"
-    sh mount_copy.sh -mc "$PATH"
+    amIRoot; Mount; copy;
 else
     echo "ERROR: Rip can't process command line arguments"
 fi
