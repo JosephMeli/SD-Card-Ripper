@@ -41,4 +41,4 @@ else
   echo "ERROR: unmount_clean file has no commands found"
 fi
 }
-exit
+exit 1

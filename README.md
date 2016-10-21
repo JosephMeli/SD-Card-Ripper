@@ -5,7 +5,7 @@
 
 ## Filename: rip.sh -> Main Driver
 run using:
-$ sh rip.sh [option] [filepath]
+$ sh rip.sh [option] [absolute file path]
 
 ### Purpose:
  This program is a driver for the mount_copy and unmount_clean scripts. The
@@ -24,25 +24,26 @@ $ sh rip.sh [option] [filepath]
 ## Filename: unmount_clean.sh
 
 ###Purpose:
- The current process in which the unmount() function executes is by scanning the
- contents of all sub folders mounted with in test and then one by one unmounting
- them. Once they are successfully unmounted then The clean() function will remove
- all the folders in Test folder so Development environment is clean.
+ The way these functions work is by first looping through the mounted point
+ and unmounting all things that are mounted within the created directories.
+ The second function is clean(), this will loop through the mount point and checks
+ if the individual directory is empty. If empty then will remove that directory from
+ the mount point.  
 
 ## Filename: mount_copy.sh:
 
 ###Purpose:
-  The program first checks for ROOT, the program must be run as root this because
-  the sudo commands times out after 15 mins of running so root privileges will
-  never time out. The Mount() function looks for dev/diks by-path. The path
-  it is looking for is the all usb devices and the first partition of those devices
-  Then will make a new directory in test folder with the name of the:
-  /dev/disk/by-path/*-usb-*-part1 ... this is to make easy when creating the
-  directories. Then the contents on all thos drives will be mount to their new
-  corresponding folder in test.  The next function is copy() this will have a
- designated file path to dump the contents to. The variable name for that is
- ($fpath). This functions uses rysnc to copy the info over. rsync takes three
- parameters of function flags, the source, the destination. I use the folder
- name from the variable each in the for loop and then know i want the contents
- in the only the DCIM folder so this /each/DCIM/ is my source path. Then this
- particular instance is copying to an external 8 TB drive.
+There are 3 functions in this file. First is the amIRoot() function which will
+exit the program if they are not root. This is for th ability to copy over long
+periods of time without having to type password again. The next function Mout(),
+will loop through all drives located by-path on /dev/disk/by-path/*-usb-*-part1.
+So its by path to all recognizable exfat devices and the first partition of those
+devices. Then will create a new directory for each drive named exactly how your
+computer names it. Then the contents of each drive will be mounted to the exact same
+corresponding folder by name. The mount point is a pre-made folder in this repository
+called mnt. The last function is copy() which will loop through all the contents
+of the the directories in the mnt folder as well as go to there /DCIM/ directory.
+And only copy that folder to a user defined destination.  This process happens with
+rysnc a command that works like rysnc takes three possible arguments. first will be
+optional flags depending on what you  want to sync, the second is source you are
+copying from and the final is the destination.

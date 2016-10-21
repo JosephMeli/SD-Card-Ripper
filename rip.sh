@@ -28,8 +28,7 @@
 
 FLAGS="$1"
 PATH="$2"
-# TODO this is broken, need to fix situation when user doesnt type a flag
-#but user types a filepath. What if user types a flag but no file path
+#check if second cammad line argument is null
 if [[ "$PATH" = "" -o "$PATH" = " " ]]; then
   echo "need an absolute file path for secon command line argument"
   exit 1
@@ -60,8 +59,11 @@ elif [[ "$FLAGS" = "-ux" -o "$FLAGS" = "-xu" ]]; then
 elif [[ "$FLAGS" = "-x" ]]; then
     echo Clean
     sh unmount_clean.sh -x
+#help or man
 elif [[ "$FLAGS" = "-h" ]]; then
     cat help.txt
+# if there is no provided flag only a file path then call default flags
+# and use that file path.
 elif [[ "$FLAGS" = "/*" ]]; then
     "$PATH" = "$FLAGS"
     sh mount_copy.sh -mc "$PATH"
