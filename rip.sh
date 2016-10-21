@@ -1,30 +1,34 @@
 #!/bin/bash
 
-#*******************************************************************************
-#                           Program Name:  Rip
-#
-#                           Author: Joseph Meli
-#                             OS: Ubuntu 16.04
-#
-# Purpose:
-# This program is a driver for the mount_copy and unmount_clean scripts. The
-# driver processes the command line flas and then calls the correct fucntion
-# Usage:
-# sh rip.sh [option]
-# options:
-# -m
-#   :calls mount function from mount_copy.sh
-# -c
-#   :calls copy function from mount_copy.sh
-# -mc or -cm
-#   :calls mount  and copy functions from mount_copy.sh
-# -u
-#   :calls unmount function from unmount_clean.sh
-# -x
-#   : calls the clean function from unmount_clean.sh
-# -ux or -xu
-#   : calls the unmount and clean fucntion from unmount_clean.sh
-#*******************************************************************************
+#************************************************#
+#                   rip.sh                       #
+#           written by Joseph Meli               #
+#             October 21, 2016                   #
+#                                                #
+#       Main Driver for SD ripper functions      #
+#************************************************#
+
+#-----------------------------------------------------------------#
+# Usage:                                                           #
+# sh rip.sh [option]                                              #
+# options:                                                        #
+# -m                                                              #
+#   :calls mount function from mount_copy.sh                      #
+# -c                                                              #
+#   :calls copy function from mount_copy.sh                       #
+# -mc or -cm                                                      #
+#   :calls mount  and copy functions from mount_copy.sh           #
+# -u                                                              #
+#   :calls unmount function from unmount_clean.sh                 #
+# -x                                                              #
+#   : calls the clean function from unmount_clean.sh              #
+# -ux or -xu                                                      #
+#   : calls the unmount and clean fucntion from unmount_clean.sh  #
+#-----------------------------------------------------------------#
+
+
+
+
 # TODO create a default flag call for is user doesent pick any flag
 FLAGS="$1"
 #Mount

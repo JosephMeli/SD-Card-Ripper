@@ -1,17 +1,12 @@
 #!/bin/bash
-
-#*******************************************************************************
-#         Program Name:  Unmount Drives and Clean Directory
-#
-#                           Author: Joseph Meli
-#                             OS: Ubuntu 16.04
-#
-# Purpose:
-# The current process in which the unmount() function executes is by scanning the
-#contents of all sub folders mounted with in mnt and then one by one unmounting
-# them. Once they are Sucessfully unmounted then The clean() function will remove
-# all the folders in Test folder so Development enviroment is clean.
-#*******************************************************************************
+#************************************************#
+#               unmount_clean.sh                 #
+#           written by Joseph Meli               #
+#             October 21, 2016                   #
+#                                                #
+#      Functions for unmount and cleaning up     #
+#             Development environment            #
+#************************************************#
 FLAGS="$1"
 
 unmount(){

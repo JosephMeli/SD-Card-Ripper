@@ -1,6 +1,6 @@
 
 
-#rip
+#SD-Ripper
 
 
 ## Filename: rip.sh -> Main Driver

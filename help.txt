@@ -15,5 +15,5 @@ options:
 -x
   : calls the clean function from unmount_clean.sh
 -ux or -xu
-  : calls the unmount and clean fucntion from unmount_clean.sh
+  : calls the unmount and clean function from unmount_clean.sh
 ******************************************************************************
