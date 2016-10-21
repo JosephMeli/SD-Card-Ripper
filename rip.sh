@@ -27,12 +27,12 @@
 #-----------------------------------------------------------------#
 
 
-
-
-# TODO create a default flag call for is user doesent pick any flag
 FLAGS="$1"
+if [ "$FLAGS" = "" -o "$FLAGS" = " "]; then
+  echo DEFAULT: Mount and Copy
+  sh mount_copy.sh -mc;
 #Mount
-if [ "$FLAGS" = "-m" ]; then
+elif [ "$FLAGS" = "-m" ]; then
   echo Mount
   sh mount_copy.sh -m;
 #Mount and Copy
