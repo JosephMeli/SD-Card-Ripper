@@ -38,6 +38,8 @@ unmount(){
   done
   echo "Unmounting Completed"
 }
+
+#TODO make this more human with read. So there is user interaction
 clean(){
 for each in "$mntpoint"*; do
   if [ "$(ls -A "$each")" ]; then
@@ -83,6 +85,8 @@ elif [[ "$FLAGS" = "-x" ]]; then
 #help or man
 elif [[ "$FLAGS" = "-h" ]]; then
     cat help.txt
+
+#TODO make this check for is a directory. To be more precise
 # if there is no provided flag only a file path then call default flags
 # and use that file path.
 elif [[ "$FLAGS" = "/*" ]]; then
