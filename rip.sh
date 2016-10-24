@@ -1,73 +1,98 @@
 #!/bin/bash
-
 #************************************************#
 #                   rip.sh                       #
 #           written by Joseph Meli               #
 #             October 21, 2016                   #
 #                                                #
-#       Main Driver for SD ripper functions      #
+#              SD Ripper Script                  #
 #************************************************#
-
-#-----------------------------------------------------------------#
-# Usage:                                                           #
-# sh rip.sh [option]                                              #
-# options:                                                        #
-# -m                                                              #
-#   :calls mount function from mount_copy.sh                      #
-# -c                                                              #
-#   :calls copy function from mount_copy.sh                       #
-# -mc or -cm                                                      #
-#   :calls mount  and copy functions from mount_copy.sh           #
-# -u                                                              #
-#   :calls unmount function from unmount_clean.sh                 #
-# -x                                                              #
-#   : calls the clean function from unmount_clean.sh              #
-# -ux or -xu                                                      #
-#   : calls the unmount and clean fucntion from unmount_clean.sh  #
-#-----------------------------------------------------------------#
-
 FLAGS="$1"
-PATH="$2"
+PATH= "$2"
+mntpoint= "mnt/"
+srcpath="/DCIM/"
+# Run as root, of course.
+amIRoot(){
+  "$(whoami)" != 'root' && (echo you are using a non-privileged account); exit 1
+}
+Mount(){
+  for each in /dev/disk/by-path/*-usb-*-part1; do
+    echo "MOUNTING -----> $each"\r;
+    mntdir="$(basename "$each")"
+    mkdir "$mntpoint""$(basename "$each")";
+    mount "$each" "$mntpoint""$(basename "$each")";
+  done
+  echo "Mounting Completed"
+}
+copy(){
+ for each in "$mntpoint"*; do
+     echo "COPYING -----> $each"\r;
+     echo "$PATH"
+     rsync -rav "${each}${srcpath}"* "$PATH"
+     sync
+   done
+}
+unmount(){
+  for each in "$mntpoint"*; do
+      echo "UNMOUNTING -----> $each"\r;
+      umount "$each";
+  done
+  echo "Unmounting Completed"
+}
+
+#TODO make this more human with read. So there is user interaction
+clean(){
+for each in "$mntpoint"*; do
+  if [ "$(ls -A "$each")" ]; then
+     echo "$each is not Empty"
+   else
+     echo "$each is Empty"
+     rm -r "$each";
+      echo "removed $each"
+    fi
+  done
+}
 #check if second cammad line argument is null
 if [[ "$PATH" = "" -o "$PATH" = " " ]]; then
   echo "need an absolute file path for secon command line argument"
   exit 1
 elif [[ "$FLAGS" = "" -o "$FLAGS" = " " ]]; then
   echo DEFAULT: Mount and Copy
-  sh mount_copy.sh -mc "$PATH";
+  amIRoot; Mount; copy;
 #Mount
 elif [[ "$FLAGS" = "-m" ]]; then
   echo Mount
-  sh mount_copy.sh -m "$PATH" ;
+  amIRoot; Mount;
 #Mount and Copy
 elif [[ "$FLAGS" = "-mc" -o "$FLAGS" = "-cm" ]]; then
   echo Mount and Copy
-  sh mount_copy.sh -mc "$PATH";
+  amIRoot; Mount; copy;
 #Copy
 elif [[ "$FLAGS" = "-c" ]]; then
   echo Copy
-  sh mount_copy.sh -c "$PATH";
+  amIRoot; copy;
 # Unmount
 elif [[ "$FLAGS" = "-u" ]]; then
     echo Unmount
-    sh unmount_clean.sh -u
+    amIRoot; unmount;
 # Unmount and Clean
 elif [[ "$FLAGS" = "-ux" -o "$FLAGS" = "-xu" ]]; then
     echo Unmount and Clean
-    sh unmount_clean.sh -ux
+    amIRoot; unmount; clean;
 # Clean
 elif [[ "$FLAGS" = "-x" ]]; then
     echo Clean
-    sh unmount_clean.sh -x
+    clean;
 #help or man
 elif [[ "$FLAGS" = "-h" ]]; then
     cat help.txt
+
+#TODO make this check for is a directory. To be more precise
 # if there is no provided flag only a file path then call default flags
 # and use that file path.
 #TODO find better to determine if file or directory
 elif [[ "$FLAGS" = "/*" ]]; then
     "$PATH" = "$FLAGS"
-    sh mount_copy.sh -mc "$PATH"
+    amIRoot; Mount; copy;
 else
     echo "ERROR: Rip can't process command line arguments"
 fi
