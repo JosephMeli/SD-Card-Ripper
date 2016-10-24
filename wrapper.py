@@ -3,13 +3,14 @@ import subprocess
 #TODO figure out how to pass a string from python to a shell command subprocess
 def show_entry_fields():
     myPath  = e1.get()
-   print("Destination: %s" % (myPath))
+    print("Destination: %s" % (myPath))
 
 def Mount():
     print "Mounting"
     subprocess.call(['bash rip.sh -m'], shell=True)
 def Copy():
     print "Copying"
+    myPath  = e1.get()
     subprocess.call(['bash rip.sh -c'], shell=True)
 def Unmount():
     print "Unmounting"
