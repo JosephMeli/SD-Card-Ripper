@@ -94,12 +94,8 @@ elif [[ "$FLAGS" = "-x" ]]; then
 #help or man
 elif [[ "$FLAGS" = "-h" ]]; then
     cat help.txt
-
-#TODO make this check for is a directory. To be more precise
-# if there is no provided flag only a file path then call default flags
-# and use that file path.
-#TODO find better to determine if file or directory
-elif [[ "$FLAGS" = "/*" ]]; then
+# checks for is FLAGS is a path to a file or directory 
+elif [  -d "$FLAGS" ] || [ -f "$FLAGS" ]; then
     "$PATH" = "$FLAGS"
     amIRoot; Mount; copy;
 else
