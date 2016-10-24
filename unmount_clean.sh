@@ -18,7 +18,7 @@ unmount(){
   done
   echo "Unmounting Completed"
 }
-
+#TODO make more human 
 clean(){
 for each in "$mntpoint"*; do
   if [ "$(ls -A "$each")" ]; then

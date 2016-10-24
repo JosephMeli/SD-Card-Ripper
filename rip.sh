@@ -34,7 +34,7 @@ if [[ "$PATH" = "" -o "$PATH" = " " ]]; then
   exit 1
 elif [[ "$FLAGS" = "" -o "$FLAGS" = " " ]]; then
   echo DEFAULT: Mount and Copy
-  sh mount_copy.sh -mc "~/";
+  sh mount_copy.sh -mc "$PATH";
 #Mount
 elif [[ "$FLAGS" = "-m" ]]; then
   echo Mount
@@ -64,6 +64,7 @@ elif [[ "$FLAGS" = "-h" ]]; then
     cat help.txt
 # if there is no provided flag only a file path then call default flags
 # and use that file path.
+#TODO find better to determine if file or directory
 elif [[ "$FLAGS" = "/*" ]]; then
     "$PATH" = "$FLAGS"
     sh mount_copy.sh -mc "$PATH"
