@@ -38,18 +38,27 @@ unmount(){
   done
   echo "Unmounting Completed"
 }
-
-#TODO make this more human with read. So there is user interaction
+# Reads in checks yes or no with the user
+asksure() {
+echo -n "Are you sure (Y/N)? "
+while read -r -n 1 -s answer; do
+  if [[ $answer = [YyNn] ]]; then
+    [[ $answer = [Yy] ]] && retval=0
+    [[ $answer = [Nn] ]] && retval=1
+    break
+  fi
+done
+# will ask user if they are sure then want to delete before rm is called
 clean(){
-for each in "$mntpoint"*; do
-  if [ "$(ls -A "$each")" ]; then
-     echo "$each is not Empty"
-   else
-     echo "$each is Empty"
-     rm -r "$each";
-      echo "removed $each"
-    fi
-  done
+if [[ asksure ]] ; then
+  echo "Ok, will begin deleting master:"
+  for each in "$mntpoint"*; do
+       rm -r "$each";
+        echo "removed $each"
+    done
+else
+  echo "Wise decsion, can never be too careful"
+fi
 }
 #check if second cammad line argument is null
 if [[ "$PATH" = "" -o "$PATH" = " " ]]; then
