@@ -33,7 +33,7 @@ $  ./rip.sh [option] [absolute file path]
 This will exit the program if they are not root. This is for the ability to
 copy over long periods of time without having to type password again.
 
-### Mout():
+### Mount():
 This will loop through all drives located by-path on /dev/disk/by-path/*-usb-*-part1.
 So its by path to all recognizable exfat devices and the first partition of those
 devices. Then will create a new directory for each drive named exactly how your
