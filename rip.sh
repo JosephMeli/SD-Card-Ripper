@@ -7,19 +7,23 @@
 #              SD Ripper Script                  #
 #************************************************#
 FLAGS="$1"
-PATH= "$2"
-mntpoint= "mnt/"
+PATH="$2"
+mntpoint="mnt/"
 srcpath="/DCIM/"
 # Run as root, of course.
 amIRoot(){
-  "$(whoami)" != 'root' && (echo you are using a non-privileged account); exit 1
+  if [[ "$id -u" != "0" ]]; then
+    echo "welcome master."
+  else
+    echo "you are using a non-privileged account"; exit 1
+   fi
 }
 Mount(){
   for each in /dev/disk/by-path/*-usb-*-part1; do
     echo "MOUNTING -----> $each"\r;
     mntdir="$(basename "$each")"
     mkdir "$mntpoint""$(basename "$each")";
-    mount "$each" "$mntpoint""$(basename "$each")";
+    "$mount" "$each" "$mntpoint""$(basename "$each")";
   done
   echo "Mounting Completed"
 }
@@ -38,28 +42,18 @@ unmount(){
   done
   echo "Unmounting Completed"
 }
-# Reads in checks yes or no with the user
-asksure() {
-  echo -n "Are you sure (Y/N)? "
-  while read -r -n 1 -s answer; do
-    if [[ $answer = [YyNn] ]]; then
-      [[ $answer = [Yy] ]] && retval=0
-      [[ $answer = [Nn] ]] && retval=1
-      break
-    fi
-  done
-}
 # will ask user if they are sure then want to delete before rm is called
 clean(){
-if [[ asksure ]] ; then
-  echo "Ok, will begin deleting master:"
-  for each in "$mntpoint"*; do
-       rm -r "$each";
-        echo "removed $each"
-    done
-else
-  echo "Wise decsion, can never be too careful"
-fi
+  read -p "Are you sure [y/n]? " -n 1 -r
+  echo " "
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    for each in "$mntpoint"*; do
+         rm -rf"$each";
+          echo "removed $each"
+    done;
+  else
+      echo "Wise decsion, can never be too careful"
+  fi
 }
 #check if second cammad line argument is null
 if [ "$PATH" == "" ] || [ "$PATH" == " " ]; then
