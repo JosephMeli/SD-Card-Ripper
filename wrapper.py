@@ -1,4 +1,6 @@
 from Tkinter import *
+# this is not complete for testing is only here for persnonal developement/use
+
 import subprocess
 #TODO figure out how to pass a string from python to a shell command subprocess
 def show_entry_fields():
