@@ -1,5 +1,6 @@
 
-![LOGO](/src/SD-Ripper-LOGO.png "LOGO") #By Joseph Meli
+![LOGO](/src/SD-Ripper-LOGO.png "LOGO") 
+#By Joseph Meli
 
 #SD-Ripper 
 
