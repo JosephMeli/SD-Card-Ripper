@@ -23,7 +23,7 @@ Mount(){
     echo "MOUNTING -----> $each"\r;
     mntdir="$(basename "$each")"
     mkdir "$mntpoint""$(basename "$each")";
-    "$mount" "$each" "$mntpoint""$(basename "$each")";
+    mount "$each" "$mntpoint""$(basename "$each")";
   done
   echo "Mounting Completed"
 }
