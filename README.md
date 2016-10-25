@@ -4,12 +4,12 @@
 
 #SD-Ripper
 
-# Filename: rip.sh -> Main Driver
+##Filename: rip.sh -> Main Driver
 run using:
 
 $  ./rip.sh [option] [absolute file path]
 
-## Usage:
+### Usage:
 
  [option]
  * -m :calls mount function from mount_copy.sh
@@ -20,22 +20,22 @@ $  ./rip.sh [option] [absolute file path]
  * -ux or -xu: calls the unmount and clean function from unmount_clean.sh
 
 
-##Functions:
+###Functions:
 
-### unmount():
+**unmount():**
  Loops through the mounted point and unmounting all things that are mounted
  within the created directories.
 
-### clean():
+**clean():**
  This will loop through the mount point and checks
  if the individual directory is empty. If empty then will remove that directory from
  the mount point.  
 
-### amIRoot():
+**amIRoot():**
 This will exit the program if they are not root. This is for the ability to
 copy over long periods of time without having to type password again.
 
-### Mount():
+** Mount():**
 This will loop through all drives located by-path on /dev/disk/by-path/*-usb-*-part1.
 So its by path to all recognizable exfat devices and the first partition of those
 devices. Then will create a new directory for each drive named exactly how your
@@ -43,7 +43,7 @@ computer names it. Then the contents of each drive will be mounted to the exact 
 corresponding folder by name. The mount point is a pre-made folder in this repository
 called mnt.
 
-### copy():
+**copy():**
 Will loop through all the contents of the the directories in the mnt folder as
 well as go to there /DCIM/ directory.And only copy that folder to a user defined
 destination.  This process happens with rysnc a command that works like rysnc
