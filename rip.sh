@@ -6,8 +6,9 @@
 #                                                #
 #              SD Ripper Script                  #
 #************************************************#
+
 FLAGS="$1"
-PATH="$2"
+DEST="$2"
 mntpoint="mnt/"
 srcpath="/DCIM/"
 # Run as root, of course.
@@ -56,7 +57,7 @@ clean(){
   fi
 }
 #check if second cammad line argument is null
-if [ "$PATH" == "" ] || [ "$PATH" == " " ]; then
+if [ "$DEST" == "" ] || [ "$DEST" == " " ]; then
   echo "need an absolute file path for secon command line argument"
   exit 1
 elif [ "$FLAGS" == "" ] || [ "$FLAGS" == " " ]; then
@@ -91,7 +92,7 @@ elif [[ "$FLAGS" == "-h" ]]; then
     cat help.txt
 # checks for is FLAGS is a path to a file or directory
 elif [  -d "$FLAGS" ] || [ -f "$FLAGS" ]; then
-    "$PATH" = "$FLAGS"
+    "$DEST" = "$FLAGS"
     amIRoot; Mount; copy;
 else
     echo "ERROR: Rip can't process command line arguments"
