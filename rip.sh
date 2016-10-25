@@ -49,7 +49,7 @@ clean(){
   echo " "
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     for each in "$mntpoint"*; do
-         rm -rf"$each";
+         rm -rf "$each";
           echo "removed $each"
     done;
   else
