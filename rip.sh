@@ -14,9 +14,11 @@ srcpath="/DCIM/"
 # Run as root, of course.
 amIRoot(){
   if [[ "$id -u" != "0" ]]; then
-    echo "welcome master."
+    echo "Welcome Master."
   else
-    echo "you are using a non-privileged account"; exit 1
+    echo "I only talk to master and you are not Master";
+    echo "Please switch to root";
+    exit 1;
    fi
 }
 Mount(){
@@ -46,7 +48,7 @@ unmount(){
 }
 # will ask user if they are sure then want to delete before rm is called
 clean(){
-  read -p "Are you sure [y/n]? " -n 1 -r
+  read -p "Master are you sure [y/n]? " -n 1 -r
   echo " "
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     for each in "$mntpoint"*; do
@@ -54,7 +56,7 @@ clean(){
           echo "removed $each"
     done;
   else
-      echo "Wise decsion, can never be too careful"
+      echo "Wise decsion Master, can never be too careful"
   fi
 }
 #check if second cammad line argument is null
