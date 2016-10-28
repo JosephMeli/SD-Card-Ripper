@@ -9,26 +9,23 @@ def show_entry_fields():
 
 def Mount():
     print "Mounting"
-    subprocess.call(['bash rip.sh -m'], shell=True)
+    subprocess.call(['./rip.sh -m'], shell=True)
 def Copy():
     print "Copying"
     myPath  = e1.get()
-    subprocess.call(['bash rip.sh -c'], shell=True)
+    subprocess.call(['./rip.sh -c'], shell=True)
 def Unmount():
     print "Unmounting"
-    subprocess.call(['bash rip.sh -u'], shell=True)
+    subprocess.call(['./rip.sh -u'], shell=True)
 def Clean():
     print "Cleaning"
-    subprocess.call(['bash rip.sh -x'], shell=True)
+    subprocess.call(['./rip.sh -x'], shell=True)
 
 
 master = Tk()
 Label(master, text="Destination:").grid(row=0, column=0)
 master.wm_title("SD-Ripper")
-
 e1 = Entry(master)
-
-
 e1.grid(row=0, column=1)
 
 Button(master, text='Mount', command=Mount).grid(row=2, column=0, sticky=W, pady=4)

@@ -13,7 +13,7 @@ mntpoint="mnt/"
 srcpath="/DCIM/"
 # Run as root, of course.
 amIRoot(){
-  if [[ "$id -u" != "0" ]]; then
+  if [[ "($id -u)" != "0" ]]; then
     echo "welcome master."
   else
     echo "you are using a non-privileged account"; exit 1
@@ -57,8 +57,10 @@ clean(){
       echo "Wise decsion, can never be too careful"
   fi
 }
+if [[ "$FLAGS" == "-h" ]]; then
+    cat help.txt
 #check if second cammad line argument is null
-if [ "$DEST" == "" ] || [ "$DEST" == " " ]; then
+elif [ "$DEST" == "" ] || [ "$DEST" == " " ]; then
   echo "need an absolute file path for secon command line argument"
   exit 1
 elif [ "$FLAGS" == "" ] || [ "$FLAGS" == " " ]; then
