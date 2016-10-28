@@ -1,5 +1,5 @@
 
-![LOGO](/src/SD-Ripper-LOGO.png "LOGO") 
+![LOGO](/src/SD-Ripper-LOGO.png "LOGO")
 
 
 #SD-Ripper

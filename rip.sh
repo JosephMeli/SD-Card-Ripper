@@ -13,13 +13,8 @@ mntpoint="mnt/"
 srcpath="/DCIM/"
 # Run as root, of course.
 amIRoot(){
-<<<<<<< HEAD
   if [[ "($id -u)" != "0" ]]; then
     echo "welcome master."
-=======
-  if [[ "$id -u" != "0" ]]; then
-    echo "Welcome Master."
->>>>>>> 420d6a5f84f4ae89bca35660660d1195419c8d8a
   else
     echo "I only talk to master and you are not Master";
     echo "Please switch to root";
