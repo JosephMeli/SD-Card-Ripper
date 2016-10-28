@@ -18,7 +18,9 @@ $  ./rip.sh [option] [absolute file path]
  * -u: calls unmount function from unmount_clean.sh
  * -x: calls the clean function from unmount_clean.sh
  * -ux or -xu: calls the unmount and clean function from unmount_clean.sh
+ * -h : for this list of commands in the terminal
 
+ ** Note you dont need a file path only when using the -h flag **
 
 ###Functions:
 

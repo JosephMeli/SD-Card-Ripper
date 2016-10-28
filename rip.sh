@@ -33,7 +33,6 @@ Mount(){
 copy(){
  for each in "$mntpoint"*; do
      echo "COPYING -----> $each"\r;
-     echo "$DEST"
      echo "$each"
      rsync -rav "$each""$srcpath"* "$DEST"
      sync
