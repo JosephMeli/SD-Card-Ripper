@@ -11,7 +11,7 @@ $  ./rip.sh [option] [absolute file path]
 
 ### Usage:
 
- [option]
+ [option][ [absolute file path] - both options are required
  * -m :calls mount function from mount_copy.sh
  * -c :calls copy function from mount_copy.sh
  * -mc or -cm: calls mount  and copy functions from mount_copy.sh
@@ -20,7 +20,7 @@ $  ./rip.sh [option] [absolute file path]
  * -ux or -xu: calls the unmount and clean function from unmount_clean.sh
  * -h : for this list of commands in the terminal
 
- **Note you dont need a file path only when using the -h flag**
+ **Note you don't need a file path only when using the -h flag**
 
 ###Functions:
 
