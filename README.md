@@ -52,3 +52,7 @@ destination.  This process happens with rysnc a command that works like rysnc
 takes three possible arguments. first will be optional flags depending on what
 you  want to sync, the second is source you are copying from and the final is
 the destination.
+
+```sh
+sudo ./rip.sh -mc /media/asgard-linux/2TB_2 /media/asgard-linux/2TB_1
+```

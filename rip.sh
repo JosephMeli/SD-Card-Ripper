@@ -11,9 +11,10 @@ FLAGS="$1"
 DEST="$2"
 mntpoint="mnt/"
 srcpath="/DCIM/"
+seedfile="seed"
 # Run as root, of course.
 amIRoot(){
-  if [[ "($id -u)" != "0" ]]; then
+  if [[ "$EUID" == "0" ]]; then
     echo "welcome master."
   else
     echo "I only talk to master and you are not Master";
@@ -23,7 +24,7 @@ amIRoot(){
 }
 Mount(){
   for each in /dev/disk/by-path/*-usb-*-part1; do
-    echo "MOUNTING -----> $each"\r;
+    echo "MOUNTING -----> $each";
     mntdir="$(basename "$each")"
     mkdir "$mntpoint""$(basename "$each")";
     mount "$each" "$mntpoint""$(basename "$each")";
@@ -32,15 +33,23 @@ Mount(){
 }
 copy(){
  for each in "$mntpoint"*; do
-     echo "COPYING -----> $each"\r;
+     echo "COPYING -----> $each";
      echo "$each"
      rsync -rav "$each""$srcpath"* "$DEST"
      sync
    done
 }
+seed(){
+ for each in "$mntpoint"*; do
+     echo "SEEDING -----> $each";
+     echo "$each"
+     rsync -rltDv "$seedfile" "$each"/ &
+     #sync
+   done
+}
 unmount(){
   for each in "$mntpoint"*; do
-      echo "UNMOUNTING -----> $each"\r;
+      echo "UNMOUNTING -----> $each";
       umount "$each";
   done
   echo "Unmounting Completed"
@@ -67,6 +76,8 @@ elif [ "$DEST" == "" ] || [ "$DEST" == " " ]; then
 elif [ "$FLAGS" == "" ] || [ "$FLAGS" == " " ]; then
   echo DEFAULT: Mount and Copy
   amIRoot; Mount; copy;
+elif [[ "$FLAGS" == "-s" ]]; then
+  amIRoot; seed
 #Mount
 elif [[ "$FLAGS" == "-m" ]]; then
   echo Mount
