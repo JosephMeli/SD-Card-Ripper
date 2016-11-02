@@ -11,6 +11,8 @@ FLAGS="$1"
 DEST="$2"
 mntpoint="mnt/"
 srcpath="/DCIM/"
+DEST2="$3"
+
 # Run as root, of course.
 amIRoot(){
   if [[ "($id -u)" != "0" ]]; then
@@ -23,7 +25,7 @@ amIRoot(){
 }
 Mount(){
   for each in /dev/disk/by-path/*-usb-*-part1; do
-    echo "MOUNTING -----> $each"\r;
+    echo "MOUNTING -----> $each";
     mntdir="$(basename "$each")"
     mkdir "$mntpoint""$(basename "$each")";
     mount "$each" "$mntpoint""$(basename "$each")";
@@ -31,16 +33,25 @@ Mount(){
   echo "Mounting Completed"
 }
 copy(){
- for each in "$mntpoint"*; do
-     echo "COPYING -----> $each"\r;
-     echo "$each"
-     rsync -rav "$each""$srcpath"* "$DEST"
-     sync
-   done
+count=0
+for each in "$mntpoint"*; do
+    count=$(($count + 1 ))
+done
+echo "$count"
+truecount=$(( $count/2 ))
+echo "$truecount"
+copyTo=$DEST
+for each in "$mntpoint"*; do
+  if [[ $truecount -eq 0 ]]; then
+    copyTo=$DEST2
+  fi
+  rsync -rav "$each"* "$copyTo" &
+  truecount=$(( $truecount - 1 ));
+  done
 }
 unmount(){
   for each in "$mntpoint"*; do
-      echo "UNMOUNTING -----> $each"\r;
+      echo "UNMOUNTING -----> $each";
       umount "$each";
   done
   echo "Unmounting Completed"
