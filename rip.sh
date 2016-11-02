@@ -12,10 +12,9 @@ DEST="$2"
 mntpoint="mnt/"
 srcpath="/DCIM/"
 DEST2="$3"
-
 # Run as root, of course.
 amIRoot(){
-  if [[ "($id -u)" != "0" ]]; then
+  if [[ "$EUID" == "0" ]]; then
     echo "welcome master."
   else
     echo "I only talk to master and you are not Master";
@@ -33,6 +32,7 @@ Mount(){
   echo "Mounting Completed"
 }
 copy(){
+
 count=0
 for each in "$mntpoint"*; do
     count=$(($count + 1 ))
@@ -48,6 +48,14 @@ for each in "$mntpoint"*; do
   rsync -rav "$each"* "$copyTo" &
   truecount=$(( $truecount - 1 ));
   done
+}
+seed(){
+ for each in "$mntpoint"*; do
+     echo "SEEDING -----> $each";
+     echo "$each"
+     rsync -rltDv "$seedfile" "$each"/ &
+     #sync
+   done
 }
 unmount(){
   for each in "$mntpoint"*; do
@@ -78,6 +86,8 @@ elif [ "$DEST" == "" ] || [ "$DEST" == " " ]; then
 elif [ "$FLAGS" == "" ] || [ "$FLAGS" == " " ]; then
   echo DEFAULT: Mount and Copy
   amIRoot; Mount; copy;
+elif [[ "$FLAGS" == "-s" ]]; then
+  amIRoot; seed
 #Mount
 elif [[ "$FLAGS" == "-m" ]]; then
   echo Mount
